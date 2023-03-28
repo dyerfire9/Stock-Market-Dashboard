@@ -1,10 +1,10 @@
 // Import express
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require("cors");
 require('dotenv').config()
 
-// Import out workout.js router
+// Import our stocks.js router
 const stockRoutes = require('./routes/stocks')
 const walletRoutes = require('./routes/wallet')
 const subStocksRoutes = require('./routes/subStocks')
@@ -13,6 +13,7 @@ const subStocksRoutes = require('./routes/subStocks')
 const app = express();
 
 app.use(express.json())
+app.use(cors());
 
 // Log the request path and the type of request
 app.use((req, res, next) => {

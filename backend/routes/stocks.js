@@ -2,26 +2,26 @@ const express = require('express')
 // Create an instance of router
 const router = express.Router()
 
+const Stock = require('../models/stockModel')
+
+// Reference controller to use the functions
+const {createStock, getStocks, getStock, updateStock, deleteStock} = require('../controllers/stockController')
+
 
 // GET: Get all stock documents (name, ticker, buy_price, amount)
-router.get('/', (req, res) => {
-    res.json({mesg: 'Get all stocks'})
-})
-
-// GET: Get a single stock document
-router.get('/:stock_id', (req, res) => {
-    res.json({mesg: 'Get all stocks'})
-})
+router.get('/', getStocks)
 
 // POST: Create a new stock document
-router.post('/', (req, res) => {
-    res.json({mesg: 'add a new stock'})
-})
+router.post('/', createStock)
 
-// DELETE: Sell a single stock
-router.delete('/:stock_id', (req, res) => {
-    res.json({mesg: 'delete a stock'})
-})
+// GET: Get a single stock document
+router.get('/:id', getStock)
+
+// DELETE: Sell a single stock document
+router.delete('/:id', deleteStock)
+
+// UPDATE: Update a single stock document
+router.delete('/:id', updateStock)
 
 // Export Router
 module.exports = router
