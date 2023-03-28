@@ -1,6 +1,6 @@
 const Stock = require('../models/stockModel')
 const mongoose = require('mongoose')
-
+// const tickerData = require('../dataset/tickers')
 
 // get all stocks
 const getStocks = async (req, res) => {

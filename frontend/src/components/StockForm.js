@@ -50,7 +50,9 @@ const StockForm = () => {
                 type="text"
                 onChange={(e) => setTicker(e.target.value)}
                 value={ticker}
-                // className={emptyFields.includes('title') ? 'error' : ''}
+                maxLength="5"
+                onInput={(e) => e.target.value = ("" + e.target.value).toUpperCase()}
+                className={emptyFields.includes('ticker') ? 'error' : ''}
             />
             
             <label>No of Shares: </label>
@@ -58,7 +60,9 @@ const StockForm = () => {
                 type="number"
                 onChange={(e) => setShares(e.target.value)}
                 value={shares}
-                // className={emptyFields.includes('load') ? 'error' : ''}
+                min="1"
+                step='1'
+                className={emptyFields.includes('shares') ? 'error' : ''}
             />
             
             <label>Buy Price ($): </label>
@@ -66,7 +70,9 @@ const StockForm = () => {
                 type="number"
                 onChange={(e) => setCost(e.target.value)}
                 value={cost}
-                className={emptyFields.includes('reps') ? 'error' : ''}
+                min="0.01"
+                step="0.01"
+                className={emptyFields.includes('cost') ? 'error' : ''}
             />
 
             <button>Buy Stock</button>
