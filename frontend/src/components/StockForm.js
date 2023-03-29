@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react"
 import { useStocksContext } from "../hooks/useStocksContext"
+let cts = require('check-ticker-symbol');
 
 const StockForm = () => {
     const [ticker, setTicker] = useState('')
@@ -12,7 +13,9 @@ const StockForm = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        if(!cts.valid(ticker)){
+            
+        }
         const stock = {ticker, shares, cost}
 
         const response = await fetch('/api/stocks', {

@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import Stocks from './pages/Stocks';
-import Portfolio from './pages/Portfolio';
+import ViewStocks from './pages/ViewStocks';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path='/' element={<Stocks/>}/>
-            <Route path='/portfolio' element={<Portfolio/>}/>
+            <Route path='/viewstocks' element={<ViewStocks/>}/>
           </Routes>
         </div>
       </BrowserRouter>

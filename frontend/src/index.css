@@ -49,7 +49,19 @@ header a {
   font-size: 1.2em;
   color: var(--primary);
 }
-.stock-info p {
+.change-green {
+  margin: 0;
+  font-size: 0.9em;
+  color: rgb(17, 199, 17);
+}
+
+.change-red {
+  margin: 0;
+  font-size: 0.9em;
+  color: red;
+}
+
+.para {
   margin: 0;
   font-size: 0.9em;
   color: #555;
@@ -64,6 +76,8 @@ header a {
   border-radius: 15px;
   color: #fff;
 }
+
+
 
 /*stock form */
 label, input {
@@ -101,3 +115,4 @@ input.error {
 .input {
   text-transform: capitalize;
 }
+

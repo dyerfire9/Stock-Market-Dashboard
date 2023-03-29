@@ -6,7 +6,29 @@ import StockForm from '../components/StockForm'
 
 export default function Stocks(){
     const {stocks, dispatch} = useStocksContext()
+    let [tickerData, setTickerData] = useState([])
+    const date = new Date()
+    date.setDate(date.getDate() - 1);
+    const curDate = `${date.getFullYear}-${date.getMonth()}-${date.getDate()}`
+    const currDate = `2023-03-28`
+    const uri = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${currDate}?adjusted=true&apiKey=YdLBTieOVWxldpeGKLoFHMZ5T_Dd3ti_`
+
+    async function getStonks(){
+        const response = await fetch(uri)
+        const json = await response.json()
+        return json
+    }
+
+    useEffect(() => {
+        getStonks()
+        .then((data) => {
+            console.log('Data', data.results)
+            setTickerData(data.results)
+        })
+        console.log('i run once')
+    }, [])
     
+
     useEffect(() => {
         // All of our fetch logic will go here
         const fetchStocks = async () => {
@@ -23,12 +45,11 @@ export default function Stocks(){
         }
         fetchStocks()
     }, [dispatch])
-    
     return(
         <div className="stocks">
             <div className="stocks-components">
             {stocks && stocks.map((stock) => (
-                <StockInfo key={stock._id} stock={stock} />
+                <StockInfo key={stock._id} stock={stock} tickerData={tickerData} />
             ))}
             </div>
             <StockForm/>

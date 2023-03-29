@@ -23,5 +23,5 @@ router.delete('/:id', deleteStock)
 // UPDATE: Update a single stock document
 router.delete('/:id', updateStock)
 
-// Export Router
+// Export RouterW
 module.exports = router

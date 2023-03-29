@@ -1,5 +1,7 @@
 const Stock = require('../models/stockModel')
 const mongoose = require('mongoose')
+let cts = require('check-ticker-symbol');
+
 // const tickerData = require('../dataset/tickers')
 
 // get all stocks
@@ -38,6 +40,7 @@ const createStock = async (req, res) => {
 
    // We will handle the empty fields and throw a error
    let emptyFields = []
+   let wrongTicker = true
 
    // If titles field is empty
    if(!ticker){
@@ -52,6 +55,11 @@ const createStock = async (req, res) => {
    if(emptyFields.length > 0){
        return res.status(400).json({error: 'Please fill in all fields', emptyFields})
    }
+//    if(!cts.valid(ticker)){
+//        wrongTicker = true
+//        return res.status(400).json({error: 'Ticker does not exist', emptyFields})
+//    }
+
    // Add stock to the database
    try {
         const stock = await Stock.create({ticker, shares, cost})

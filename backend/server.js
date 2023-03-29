@@ -12,7 +12,7 @@ const subStocksRoutes = require('./routes/subStocks')
 // start express app
 const app = express();
 
-app.use(express.json())
+app.use(express.json()) 
 app.use(cors());
 
 // Log the request path and the type of request
