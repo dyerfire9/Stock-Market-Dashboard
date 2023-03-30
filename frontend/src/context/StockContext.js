@@ -23,7 +23,6 @@ export const stocksReducer = (state, action) => {
     }
 } 
 
-
 export const StocksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(stocksReducer, {
         stocks: null

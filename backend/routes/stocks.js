@@ -1,6 +1,12 @@
 const express = require('express')
+const requireAuth = require('../middleware/requireAuth')
+
+
 // Create an instance of router
 const router = express.Router()
+
+// Authenticate the user first in order to see stocks
+router.use(requireAuth)
 
 const Stock = require('../models/stockModel')
 

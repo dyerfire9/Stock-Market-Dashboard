@@ -1,6 +1,7 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { useStocksContext } from "../hooks/useStocksContext"
 import { useEffect, useState} from "react"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 
 const StockInfo = ({stock, tickerData}) => {
@@ -52,10 +53,17 @@ const StockInfo = ({stock, tickerData}) => {
       }
 
     const {dispatch} = useStocksContext()
+    const {user} = useAuthContext()
 
     async function handleClick() {
+        if (!user){
+            return
+        }
         const response = await fetch('/api/stocks/' + stock._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
 

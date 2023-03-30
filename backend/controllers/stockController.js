@@ -6,7 +6,10 @@ let cts = require('check-ticker-symbol');
 
 // get all stocks
 const getStocks = async (req, res) => {
-    const stocks = await Stock.find({}).sort({createAt: -1})
+    const user_id = req.user._id
+
+    // Find docs that are created/owned by the user
+    const stocks = await Stock.find({user_id}).sort({createAt: -1})
 
     res.status(200).json(stocks)
 }   
@@ -62,7 +65,8 @@ const createStock = async (req, res) => {
 
    // Add stock to the database
    try {
-        const stock = await Stock.create({ticker, shares, cost})
+        const user_id = req.user._id
+        const stock = await Stock.create({ticker, shares, cost, user_id})
        res.status(200).json(stock)
    } 
    catch(error){

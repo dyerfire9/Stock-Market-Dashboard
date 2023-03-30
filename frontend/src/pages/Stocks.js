@@ -1,11 +1,13 @@
 import { useEffect, useState} from "react"
 import { useStocksContext } from "../hooks/useStocksContext"
+import { useAuthContext } from '../hooks/useAuthContext'
 
 import StockInfo from '../components/StockInfo'
 import StockForm from '../components/StockForm'
 
 export default function Stocks(){
     const {stocks, dispatch} = useStocksContext()
+    const {user} = useAuthContext()
     let [tickerData, setTickerData] = useState([])
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -32,7 +34,11 @@ export default function Stocks(){
     useEffect(() => {
         // All of our fetch logic will go here
         const fetchStocks = async () => {
-            const response = await fetch('http://localhost:5000/api/stocks')
+            const response = await fetch('http://localhost:5000/api/stocks', {
+                headers: { 
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             // Now we check if the response is ok
@@ -43,8 +49,10 @@ export default function Stocks(){
                 
             } 
         }
-        fetchStocks()
-    }, [dispatch])
+        if (user) {
+            fetchStocks()
+        }
+    }, [dispatch, user])
     return(
         <div className="stocks">
             <div className="stocks-components">

@@ -1,28 +1,39 @@
 import { useEffect, useState} from "react"
 import { useStocksContext } from "../hooks/useStocksContext"
+import { useAuthContext } from "../hooks/useAuthContext"
+
 let cts = require('check-ticker-symbol');
 
 const StockForm = () => {
+    const {dispatch} = useStocksContext()
+    const {user} = useAuthContext()
+
     const [ticker, setTicker] = useState('')
     const [shares, setShares] = useState('')
     const [cost, setCost] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-    const {dispatch} = useStocksContext()
 
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if(!cts.valid(ticker)){
-            
+
+        // Check if we got a user 
+        if(!user){
+            setError('You must be logged in')
+            return
         }
+        // if(!cts.valid(ticker)){    
+        // }
         const stock = {ticker, shares, cost}
 
+    
         const response = await fetch('/api/stocks', {
             method: 'POST',
             body: JSON.stringify(stock),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json()
