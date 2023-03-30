@@ -22,6 +22,7 @@ export default function Navbar(){
                 <nav>
                     {user && (<div>
                             <span>Hi, {user.u_name}</span>
+                            <span> | ${user.u_balance}</span>
                             <button onClick={handleClick}>Logout</button>   
                         </div>
                     )}

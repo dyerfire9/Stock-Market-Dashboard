@@ -24,7 +24,7 @@ const StockInfo = ({stock, tickerData}) => {
         })
     }, [])
 
-    // function getStonks(){
+    // function getStonks(){}
     //     tickerData.forEach((ticker)=> {
     //         if(ticker.T === stock.ticker){
     //             setData(ticker)

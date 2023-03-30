@@ -11,13 +11,15 @@ const createToken = (_id) => {
 const signupUser = async (req, res) => {
     const {name, email, password} = req.body
 
+
     try{
         const user = await User.signup(name, email, password)
-
+        const u_name = user.name
+        const u_balance = user.balance
         // Create a token
         const token = createToken(user._id)
 
-        res.status(200).json({name, email, token})
+        res.status(200).json({u_name, u_balance, email, token})
 
     }
     catch(error){
@@ -37,7 +39,7 @@ const loginUser = async (req, res) => {
         const u_name = user.name
         const u_balance = user.balance
 
-        res.status(200).json({u_balance, u_name, email, token})
+        res.status(200).json({u_name, u_balance, email, token})
 
     }
     catch(error){
