@@ -71,7 +71,7 @@ const createStock = async (req, res) => {
 
 }
 
-// delete a stock
+// sell a stock
 const deleteStock = async (req, res) => {
     const {id} = req.params
 

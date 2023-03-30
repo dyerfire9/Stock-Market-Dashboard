@@ -16,14 +16,7 @@ const stockSchema = new Schema({
     cost: {
         type: Number,
         required: true
-    },
-    value: {
-        type: Number
-    },
-    change:{
-        type: Number
     }
-
 }, {timestamps: true})
 
 

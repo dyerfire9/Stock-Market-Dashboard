@@ -10,22 +10,20 @@ const StockInfo = ({stock, tickerData}) => {
     let [totalValue, setTotalValue] = useState('')
   
 
-    useEffect(() => {
-        if (tickerData){
-            tickerData.forEach((ticker)=> {
-                if(ticker.T === stock.ticker){
-                    setData(ticker)
-                    console.log(data)
-                }
-                const stockPrice = data.vw
-                setPrice(stockPrice)
-                setChange((((stockPrice - stock.cost)) / stock.cost) * 100)
-                setTotalValue((stock.shares * stockPrice))
-            })
-        }
+    useEffect(() => { 
+        tickerData.forEach((ticker)=> {
+            if(ticker.T === stock.ticker){
+                setData(ticker)
+                console.log(data)
+            }
+            const stockPrice = data.vw
+            setPrice(stockPrice)
+            setChange((((stockPrice - stock.cost)) / stock.cost) * 100)
+            setTotalValue((stock.shares * stockPrice))
+        })
     }, [])
 
-    // function getStonks(){ 
+    // function getStonks(){
     //     tickerData.forEach((ticker)=> {
     //         if(ticker.T === stock.ticker){
     //             setData(ticker)

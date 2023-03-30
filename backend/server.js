@@ -4,14 +4,16 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 require('dotenv').config()
 
-// Import our stocks.js router
+// Import our routers
 const stockRoutes = require('./routes/stocks')
-const walletRoutes = require('./routes/wallet')
-const subStocksRoutes = require('./routes/subStocks')
+const UserRoutes = require('./routes/users')
+
 
 // start express app
 const app = express();
 
+
+// routes
 app.use(express.json()) 
 app.use(cors());
 
@@ -23,8 +25,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/stocks', stockRoutes)
-app.use('/api/wallet', walletRoutes)
-app.use('/api/subStocks', subStocksRoutes)
+app.use('/api/user', UserRoutes)
+
 
 app.get('/', (req, res) => {
     res.json({msg: 'Welcome to the app'})
