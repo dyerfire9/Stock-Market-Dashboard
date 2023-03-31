@@ -15,7 +15,6 @@ const StockInfo = ({stock, tickerData}) => {
         tickerData.forEach((ticker)=> {
             if(ticker.T === stock.ticker){
                 setData(ticker)
-                console.log(data)
             }
             const stockPrice = data.vw
             setPrice(stockPrice)
@@ -54,14 +53,11 @@ async function handleClick() {
     const json1 = await response1.json()
 
     if (!response1.ok) {
-        console.log(json1.error)
     }
 
     // if response is good, we will reset all the states and set error state to null again
     if (response1.ok){
-        console.log('User Before', user)
         userDispatch({type: 'SET_BALANCE', payload: json1.balance})
-        console.log('User After', user)
 
     }
 

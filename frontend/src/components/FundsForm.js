@@ -1,13 +1,12 @@
-import { useEffect, useState} from "react"
+import { useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
-
-let cts = require('check-ticker-symbol');
 
 const FundsForm = () => {
     const {user, dispatch} = useAuthContext()
     let [amount, setAmount] = useState(1)
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -17,6 +16,7 @@ const FundsForm = () => {
             return
         }
         const email = user.email
+        // Add amount to user's balance
         const response = await fetch('/api/user/balance', {
             method: 'POST',
             body: JSON.stringify({amount, email}),
@@ -31,12 +31,9 @@ const FundsForm = () => {
             setError(json.error)
             setEmptyFields(json.emptyFields)
         }
-        // if response is good, we will reset all the states and set error state to null again
-        if (response.ok){
-            console.log('User Before', user)
-            dispatch({type: 'SET_BALANCE', payload: json.balance})
-            console.log('User After', user)
 
+        if (response.ok){
+            dispatch({type: 'SET_BALANCE', payload: json.balance})
         }
     }
     

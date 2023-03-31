@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
 :root {
   --primary: #9953fa;
   --error: #e7195a;
@@ -57,19 +56,19 @@ header a {
 }
 .change-green {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: rgb(17, 199, 17);
 }
 
 .change-red {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: red;
 }
 
 .para {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: #555;
 }
 .stock-info span {
@@ -233,4 +232,7 @@ form.signup, form.login {
   border-radius: 15px;
   color: #fff;
   text-decoration: none;
+}
+.sub-stock-form button {
+  font-size: 1em;
 }

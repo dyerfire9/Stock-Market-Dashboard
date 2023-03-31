@@ -14,6 +14,7 @@ export default function SubscribedStocks(){
     const yesterday = date.toISOString().slice(0, 10); 
     const uri = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${yesterday}?adjusted=true&apiKey=YdLBTieOVWxldpeGKLoFHMZ5T_Dd3ti_`;
 
+    // Get all Subscribed Stocks
     useEffect(() => {
         const fetchSubStocks = async () => {
             const response = await fetch('/api/subStocks/', {
@@ -26,7 +27,6 @@ export default function SubscribedStocks(){
 
             if (response.ok) {
                 // We will run the set stocks function and pass in the data as json
-                console.log(json)
                 dispatch({type:'SET_SUBSTOCKS', payload: json})
             } 
         }
@@ -34,19 +34,16 @@ export default function SubscribedStocks(){
             fetchSubStocks()
         }
 
-        // Get stock data
+        // Get stocks data
         async function getStonks(){
             const response = await fetch(uri)
             const json = await response.json()
             return json
         }
-        
         getStonks()
         .then((data) => {
-            console.log('Data', data.results)
             setTickerData(data.results)
         })
-        console.log('i run once')
         
     }, [dispatch, user])
 

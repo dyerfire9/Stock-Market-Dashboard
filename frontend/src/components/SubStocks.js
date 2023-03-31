@@ -2,8 +2,6 @@ import { useSubStocksContext } from "../hooks/useSubStocksContext"
 import { useEffect, useState} from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 
-const finnhub = require('finnhub');
-
 
 const SubStocks = ({subStock, tickerData}) => {
     const {user, dispatch: userDispatch} = useAuthContext()
@@ -12,13 +10,11 @@ const SubStocks = ({subStock, tickerData}) => {
     let [price, setPrice] = useState(-1)
 
     useEffect(() => {
-
         const getTickerPrice = () => {
             tickerData.forEach((ticker)=> {
                 if(ticker.T === subStock.ticker){
                     const stockPrice = ticker.vw
                     setPrice(stockPrice)
-                    console.log(stockPrice)
             }})}
 
         getTickerPrice()
@@ -36,7 +32,7 @@ const SubStocks = ({subStock, tickerData}) => {
       }
 
       const handleClick = async () => {
-
+        // Delete sub-Stock
         const response = await fetch('/api/subStocks/' + subStock._id, {
             method: 'DELETE',
             headers: {
@@ -46,9 +42,11 @@ const SubStocks = ({subStock, tickerData}) => {
         const json = await response.json()
     
         if (response.ok){
+            // Update global substock state
             dispatch({type: 'DELETE_SUBSTOCK', payload: json})
         }
       }
+
 return(
     <div className="sub-stock-info">
         <div className="sub-stock-title"><h4>{subStock.ticker}</h4></div>
@@ -58,6 +56,5 @@ return(
     </div>
 )
 }
-
 
 export default SubStocks

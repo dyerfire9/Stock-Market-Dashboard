@@ -1,28 +1,16 @@
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
-import { useState, useEffect } from 'react';
 import { useAuthContext } from "./hooks/useAuthContext"
 
+// Import all pages
 import Dashboard from './pages/Dashboard';
 import SubscribedStocks from './pages/SubcribedStocks'
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
-// import Dashboard from './pages/Dashboard';
 
+// Render all pages
 function App() {
   const {user} = useAuthContext()
-  const [balance, setBalance] = useState(0);
-
-  useEffect(() => {
-    // make API call to retrieve user's balance
-    // and update state with the balance
-    // for example:
-    fetch('/api/user/balance')
-      .then(res => res.json())
-      .then(data => setBalance(data.balance))
-      .catch(err => console.log(err));
-  }, []);
-
 
   return (
     <div className="App">

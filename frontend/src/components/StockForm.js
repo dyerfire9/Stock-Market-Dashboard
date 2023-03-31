@@ -1,8 +1,6 @@
-import { useEffect, useState} from "react"
+import { useState } from "react"
 import { useStocksContext } from "../hooks/useStocksContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-
-let cts = require('check-ticker-symbol');
 
 const StockForm = () => {
     const {dispatch} = useStocksContext()
@@ -25,6 +23,7 @@ const StockForm = () => {
         }
         const email = user.email
         const amount = shares * cost
+        // Subtract amount from balance
         const response1 = await fetch('/api/user/subBalance', {
             method: 'POST',
             body: JSON.stringify({amount, email}),
@@ -40,16 +39,12 @@ const StockForm = () => {
         }
         // if response is good, we will reset all the states and set error state to null again
         if (response1.ok){
-            console.log('User Before', user)
             userDispatch({type: 'SET_BALANCE', payload: json1.balance})
-            console.log('User After', user)
         }
 
 
-
-        
         const stock = {ticker, shares, cost}
-
+        // Add stock to database
         const response = await fetch('/api/stocks', {
             method: 'POST',
             body: JSON.stringify(stock),
@@ -71,7 +66,6 @@ const StockForm = () => {
             setCost('')
             setError(null)
             setEmptyFields([])
-            console.log('new stock bought', json)
             dispatch({type: 'BUY_STOCK', payload: json})
 
         }

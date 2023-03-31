@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 require('dotenv').config()
 
-// Import our routers
+// Import the routers
 const stockRoutes = require('./routes/stocks')
 const UserRoutes = require('./routes/users')
 const SubStocksRoutes = require('./routes/subStocks')
@@ -12,8 +12,11 @@ const SubStocksRoutes = require('./routes/subStocks')
 // start express app
 const app = express();
 
-// routes
+// Middleware
+// Fetches request with json
 app.use(express.json()) 
+
+// To prevent cors erros
 app.use(cors());
 
 // Log the request path and the type of request

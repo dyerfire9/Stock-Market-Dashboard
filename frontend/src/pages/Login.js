@@ -1,6 +1,8 @@
 import { useLogin } from "../hooks/useLogin"
 const { useState } = require("react")
 
+
+// Login Page
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setpassword] = useState('')

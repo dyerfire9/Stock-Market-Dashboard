@@ -5,7 +5,7 @@ export const useSubStocksContext = () => {
     const context = useContext(SubStocksContext)
 
     if (!context){
-        throw Error('useStocksContext must be used inside an SubStocksContextProvider')
+        throw Error('useStocksContext must be used inside the SubStocksContextProvider')
     }
 
 

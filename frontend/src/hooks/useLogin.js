@@ -25,7 +25,7 @@ export const useLogin = () => {
              // save user to the local storage (json web token and user email)
              localStorage.setItem('user', JSON.stringify(json))
 
-             // update auth context
+             // update auth global context
              dispatch({type: 'LOGIN', payload: json})
 
              setIsLoading(false)

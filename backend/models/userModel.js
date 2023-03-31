@@ -57,11 +57,13 @@ userSchema.statics.signup = async function (name, email, password){
   return user
 }
 
+// Login Method
 userSchema.statics.login = async function (email, password){
   // Validate email & password
   if (!email || !password){
     throw Error('All fields must be filled')
   }
+  // Find user in db
   const user = await this.findOne({email})
   if (!user) {
     throw Error('User not found')
@@ -76,7 +78,7 @@ userSchema.statics.login = async function (email, password){
   return user
 }
 
-
+// Add funds to balance property
 userSchema.statics.addFunds = async function (amount, email) {
   const user = await this.findOne({email})
   if (!user) {
@@ -89,6 +91,7 @@ userSchema.statics.addFunds = async function (amount, email) {
   return user
 }
 
+// Subtract funds to balance property
 userSchema.statics.subFunds = async function (amount, email) {
   const user = await this.findOne({email})
   if (!user) {

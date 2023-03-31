@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { StocksContextProvider } from './context/StockContext'
 import { SubStocksContextProvider } from './context/SubStockContext'
-
 import { AuthContextProvider } from './context/AuthContext'
 import { UsersContextProvider } from './context/UsersContext'
 

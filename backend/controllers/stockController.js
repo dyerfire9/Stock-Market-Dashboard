@@ -2,9 +2,8 @@ const Stock = require('../models/stockModel')
 const mongoose = require('mongoose')
 let cts = require('check-ticker-symbol');
 
-// const tickerData = require('../dataset/tickers')
 
-// get all stocks
+// Get all stocks method
 const getStocks = async (req, res) => {
     const user_id = req.user._id
 
@@ -14,13 +13,13 @@ const getStocks = async (req, res) => {
     res.status(200).json(stocks)
 }   
 
-// get a single stock
+// Get a single stock
 const getStock = async (req, res) => {
-    // Grab the id property from the req.params
+    // Grab the id property
     const {id} = req.params
     
     // We need to check if the object id is valid (from MongoDB)
-    // If it isn't, it return error 404. Otherwise, carry on.
+    // If it isn't, it return error 404.
     if (!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'ID not found, No Such Stock'})
     }
@@ -35,7 +34,7 @@ const getStock = async (req, res) => {
     res.status(200).json(stock)
 }
 
-// create a new stock
+// Create a new stock
 const createStock = async (req, res) => {
    // Get the stock details from the request
    const {ticker, shares, cost} = req.body
@@ -43,7 +42,7 @@ const createStock = async (req, res) => {
    // We will handle the empty fields and throw a error
    let emptyFields = []
 
-   // If ticker field is empty
+   // Check if any field is empty
    if(!ticker){
        emptyFields.push('ticker')
    }
@@ -57,6 +56,7 @@ const createStock = async (req, res) => {
        return res.status(400).json({error: 'Please fill in all fields', emptyFields})
    }
 
+   // Check if stock symbol is valid
    if(!cts.valid(ticker)) {
     return res.status(400).json({error: 'Please enter a valid ticker'})
 }
@@ -72,14 +72,14 @@ const createStock = async (req, res) => {
 
 }
 
-// sell a stock
+// Sell a stock
 const deleteStock = async (req, res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Stock'})
     }
-    // find the document that the _id property: id
+    // find the document with the _id property: id
     const stock = await Stock.findOneAndDelete({_id: id})
 
     // If stock document does not exist
@@ -89,7 +89,7 @@ const deleteStock = async (req, res) => {
     res.status(200).json(stock)
     
 }
-// update a stock
+// Update a stock
 const updateStock = async (req, res) => {
     const {id} = req.params
 
@@ -97,7 +97,6 @@ const updateStock = async (req, res) => {
         return res.status(404).json({error: 'No Such Stock'})
     }
 
-    // re.body - is an object that contains proeprties 
     const stock = await Stock.findByIdAndUpdate({_id: id}, {
         ...req.body
     })

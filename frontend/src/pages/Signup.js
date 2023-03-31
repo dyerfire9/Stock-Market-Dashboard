@@ -1,6 +1,7 @@
 import { useSignup } from "../hooks/useSignup"
 const { useState } = require("react")
 
+// Signup Page
 const Signup = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')

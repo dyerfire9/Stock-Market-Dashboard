@@ -1,6 +1,7 @@
-import { useEffect, useState} from "react"
+import { useState} from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useSubStocksContext } from "../hooks/useSubStocksContext"
+
 
 const SubStocksForm = () => {
     const {user} = useAuthContext()
@@ -17,6 +18,8 @@ const SubStocksForm = () => {
             setError('You must be logged in')
             return
         }
+
+        // Add ticker to stock subscription
         const response = await fetch('/api/subStocks', {
             method: 'POST',
             body: JSON.stringify({ticker}),
@@ -31,20 +34,18 @@ const SubStocksForm = () => {
             setError(json.error)
             setEmptyFields(json.emptyFields)
         }
-        // if response is good, we will reset all the states and set error state to null again
+        // If response is good, we will reset all the states and update the global substock state
         if (response.ok){
             setTicker('')
             setError(null)
             setEmptyFields([])
-            console.log('subscribed to new stock ', json)
             dispatch({type: 'ADD_SUBSTOCK', payload: json})
-
         }
     }
     
     return (
         <form className="sub-stock-form" onSubmit={handleSubmit}>
-            <h3>Add Stocks to Watch</h3>
+            <h3>Add Stocks to Track</h3>
             
             <label>Enter A Ticker (Symbol): </label>
             <input 

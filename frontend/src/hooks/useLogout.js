@@ -12,7 +12,8 @@ export const useLogout = () => {
 
         // dispatch logout action
         dispatch({type: 'LOGOUT'})
-        // Clear stocks
+
+        // clear stocks
         stockDispatch({type: 'SET_STOCKS', payload: null})
     }
     return {logout}

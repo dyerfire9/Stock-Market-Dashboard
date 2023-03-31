@@ -17,6 +17,7 @@ const getSubStocks = async (req, res) => {
 const addSubStock = async (req, res) => {
     const { ticker } = req.body
     let emptyFields = []
+    
     // If ticker field is empty
     if (!ticker) {
       emptyFields.push('ticker')
