@@ -7,8 +7,7 @@ const router = express.Router()
 // Authenticate the user first in order to see stocks
 router.use(requireAuth)
 
-const subStock = require('../models/subStockModel')
-
+// Import all controllers
 const {getSubStocks, addSubStock, delSubStock} = require('../controllers/subStockController')
 
 // GET: Get all subscribed stocks

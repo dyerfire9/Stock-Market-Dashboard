@@ -1,11 +1,10 @@
 const express = require('express')
+
 // Create an instance of router
 const router = express.Router()
 
 // get controller functions 
-const {signupUser, loginUser, getSubStocks, addSubStock, getStocks, buyStock, sellStock, updateStock, balance, subBalance} = require('../controllers/userController')
-// Get User Model
-const Users = require('../models/userModel')
+const {signupUser, loginUser, balance, subBalance} = require('../controllers/userController')
 
 // signup route
 router.post('/signup', signupUser)
@@ -13,32 +12,11 @@ router.post('/signup', signupUser)
 // login route
 router.post('/login', loginUser)
 
-//get all stocks
-router.get('/', getStocks)
-
-//get all subbed stocks stocks
-router.get('/subStocks', getSubStocks)
-
-// add sub stock route 
-router.post('/subStocks', addSubStock) 
-
-
-// buy stock route 
-router.post('/', buyStock) 
-
-// sell stock route
-router.post('/stock/:id', sellStock)
-
-// Update stock route
-router.post('/stock/:id', updateStock)
-
 // add balance route 
 router.post('/balance', balance)
 
-// add balance route 
+// subtract balance route 
 router.post('/subBalance', subBalance)
-
-
 
 
 module.exports = router

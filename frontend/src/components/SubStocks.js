@@ -1,45 +1,28 @@
-import { usesubStocksContext } from "../hooks/useStocksContext"
+import { useSubStocksContext } from "../hooks/useSubStocksContext"
 import { useEffect, useState} from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
+
 const finnhub = require('finnhub');
 
 
 const SubStocks = ({subStock, tickerData}) => {
+    const {user, dispatch: userDispatch} = useAuthContext()
+    const {dispatch} = useSubStocksContext()
     const symbol = subStock.ticker
-    let [stockData, setStockData] = useState([])
-    let [stockName, setStockName] = useState('')
-    let [stockPic, setStockPic] = useState('')
     let [price, setPrice] = useState(-1)
 
-    // const getStockData = async () => {
-    //     const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-    //     api_key.apiKey = "cghh549r01qjd0395a6gcghh549r01qjd0395a70";
-    //     const finnhubClient = new finnhub.DefaultApi()
+    useEffect(() => {
 
-    //     finnhubClient.companyProfile2({'symbol': 'AAPL'}, (error, data, response) => {
-    //         if(response.ok){
-    //             setStockData(data)
-    //         }
-    //       });
-    //       console.log(stockData.name)
-    //     //   setStockName(stockData.name)
-    //     //   setStockPic(stockData.logo)
-    // }
+        const getTickerPrice = () => {
+            tickerData.forEach((ticker)=> {
+                if(ticker.T === subStock.ticker){
+                    const stockPrice = ticker.vw
+                    setPrice(stockPrice)
+                    console.log(stockPrice)
+            }})}
 
-    const getTickerPrice = () => {
-        tickerData.forEach((ticker)=> {
-            if(ticker.T === subStock.ticker){
-                const stockPrice = ticker.vw
-                setPrice(stockPrice)
-                console.log(stockPrice)
-            } 
-        })
-    }
-
-    useEffect(() => { 
         getTickerPrice()
-        // getStockData()
-    }, [])
+      }, [symbol])
 
      // Function to round
      function roundTo(n, digits) {
@@ -51,16 +34,28 @@ const SubStocks = ({subStock, tickerData}) => {
         var test =(Math.round(n) / multiplicator);
         return +(test.toFixed(digits));
       }
-      const handleClick = () => {
 
+      const handleClick = async () => {
+
+        const response = await fetch('/api/subStocks/' + subStock._id, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        const json = await response.json()
+    
+        if (response.ok){
+            dispatch({type: 'DELETE_SUBSTOCK', payload: json})
+        }
       }
 return(
-    <div className="stock-info">
-    {stockPic && <div className="sub-stock-title"><img src={`${stockPic}`} class="stock-icon"/><h4>{subStock.ticker} - {stockName}</h4></div>}
-    
-    <p className="para"><strong>Current (Daily) Price $: </strong>{price && roundTo(price, 2)}</p>
-    <span onClick={handleClick}>Delete</span>
-</div>
+    <div className="sub-stock-info">
+        <div className="sub-stock-title"><h4>{subStock.ticker}</h4></div>
+        <p className="para"><strong>Current (Daily) Price $: </strong>{price && roundTo(price, 2)}</p>
+        <span className="span1" onClick={handleClick}>Delete</span>
+        <a className="span2" target="blank" href={`https://ca.finance.yahoo.com/quote/${symbol}/chart?p=${symbol}`}>View Chart</a>
+    </div>
 )
 }
 

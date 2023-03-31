@@ -91,13 +91,7 @@ header a {
   overflow: hidden;
   overflow-y: scroll;
 }
-.sub-stocks-components{
-  width: 700px;
-  height: 250px;
-  padding: 10px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
+
 .create1{
   grid-area: create1;
 }
@@ -188,4 +182,55 @@ form.signup, form.login {
   margin-left: 10px;
   padding-top: 5px;
 
+}
+
+/* ----------------------------------------- */
+.sub-stocks-components{
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.sub-stock-info {
+  background: #fff;
+  border-radius: 15px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.sub-stock-info h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+
+.para {
+  margin: 0;
+  font-size: 1em;
+  color: #555;
+}
+
+.span1 {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #9953fa;
+  padding: 6px;
+  border-radius: 15px;
+  color: #fff;
+}
+.span2 {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  cursor: pointer;
+  background: #9953fa;
+  padding: 6px;
+  border-radius: 15px;
+  color: #fff;
+  text-decoration: none;
 }

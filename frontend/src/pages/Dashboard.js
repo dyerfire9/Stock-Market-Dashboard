@@ -3,7 +3,6 @@ import { useStocksContext } from "../hooks/useStocksContext"
 import { useAuthContext } from '../hooks/useAuthContext'
 
 import StockInfo from '../components/StockInfo'
-import SubStocks from "../components/SubStocks"
 import StockForm from '../components/StockForm'
 import FundsForm from "../components/FundsForm"
 

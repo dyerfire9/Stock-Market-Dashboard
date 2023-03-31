@@ -9,7 +9,7 @@ const getStocks = async (req, res) => {
     const user_id = req.user._id
 
     // Find docs that are created/owned by the user
-    const stocks = await Stock.find({user_id}).sort({createAt: -1})
+    const stocks = await Stock.find({user_id}).sort({createdAt: -1})
 
     res.status(200).json(stocks)
 }   

@@ -44,35 +44,6 @@ const loginUser = async (req, res) => {
 
 }
 
-const getSubStocks = async (req, res) => {
-    const {id} = req.params
-
-    res.json({msg: id})
-}
-
-const addSubStock = async (req, res) => {}
-
-// get all stocks route 
-const getStocks = async (req, res) => {
-    const user_id = req.user._id
-
-    // Find docs that are created/owned by the user
-    const stocks = await Stock.find({user_id}).sort({createAt: -1})
-
-    res.status(200).json(stocks)
-}
-// buy stock route 
-const buyStock = async (req, res) => {
-    res.json({msg: 'buy stock'})
-}
-// sell stock route
-const sellStock = async (req, res) => {
-    res.json({msg: 'sell stock'})
-}
-// Update stock route
-const updateStock = async (req, res) => {
-    res.json({msg: 'update stock'})
-}
 // add balance route  
 const balance = async (req, res) => {
     try{
@@ -104,12 +75,6 @@ const subBalance = async (req, res) => {
 module.exports = {
     signupUser,
     loginUser,
-    getSubStocks,
-    addSubStock,
-    getStocks,
-    buyStock,
-    sellStock,
-    updateStock,
     balance,
     subBalance
 }
