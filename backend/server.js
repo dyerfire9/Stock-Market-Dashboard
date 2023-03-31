@@ -7,11 +7,10 @@ require('dotenv').config()
 // Import our routers
 const stockRoutes = require('./routes/stocks')
 const UserRoutes = require('./routes/users')
-
+const SubStocksRoutes = require('./routes/subStocks')
 
 // start express app
 const app = express();
-
 
 // routes
 app.use(express.json()) 
@@ -26,11 +25,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/stocks', stockRoutes)
 app.use('/api/user', UserRoutes)
-
-
-app.get('/', (req, res) => {
-    res.json({msg: 'Welcome to the app'})
-})
+app.use('/api/subStocks', SubStocksRoutes)
 
 //connect to mongo
 mongoose.connect(process.env.MONGO_URI)

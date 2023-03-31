@@ -13,6 +13,7 @@ export const stocksReducer = (state, action) => {
         case 'BUY_STOCK':
             return{
                 stocks: [action.payload, ...state.stocks]
+            
             }
         case 'SELL_STOCK':
             return{

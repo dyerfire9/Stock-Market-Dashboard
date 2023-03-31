@@ -22,30 +22,13 @@ const StockInfo = ({stock, tickerData}) => {
             setChange((((stockPrice - stock.cost)) / stock.cost) * 100)
             setTotalValue((stock.shares * stockPrice))
         })
-    }, [])
+    }, [price, change, totalValue])
 
-    // function getStonks(){}
-    //     tickerData.forEach((ticker)=> {
-    //         if(ticker.T === stock.ticker){
-    //             setData(ticker)
-    //             console.log(data)
-    //         }
-    //     })
-    // }
-    
-    // useEffect(() => {
-    //     getStonks()
-    //     const stockPrice = data.vw
-    //     setPrice(stockPrice)
-    //     setChange((((stockPrice - stock.cost)) / stock.cost) * 100)
-    //     setTotalValue((stock.shares * price))
-    //   }, []); 
-  
+    // Function to round
     function roundTo(n, digits) {
         if (digits === undefined) {
           digits = 0;
         }
-      
         var multiplicator = Math.pow(10, digits);
         n = parseFloat((n * multiplicator).toFixed(11));
         var test =(Math.round(n) / multiplicator);

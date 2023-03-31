@@ -27,7 +27,6 @@ const StockForm = () => {
         // }
         const stock = {ticker, shares, cost}
 
-    
         const response = await fetch('/api/stocks', {
             method: 'POST',
             body: JSON.stringify(stock),

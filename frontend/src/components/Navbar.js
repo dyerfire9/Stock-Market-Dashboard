@@ -9,7 +9,19 @@ export default function Navbar(){
     const handleClick = () => {
         logout()
     }
+    // const addFunds = async () => {
+    //     const amount = {value}
 
+    //     const response0 = await fetch('/api/user/balance', {
+    //         method: 'POST',
+    //         body: JSON.stringify(value, user.balance),
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${user.token}`
+    //         }
+    //     })
+        
+    // }
     return(
         <header>
             <div className="container">

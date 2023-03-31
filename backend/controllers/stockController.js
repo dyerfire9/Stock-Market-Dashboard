@@ -14,7 +14,6 @@ const getStocks = async (req, res) => {
     res.status(200).json(stocks)
 }   
 
-
 // get a single stock
 const getStock = async (req, res) => {
     // Grab the id property from the req.params
@@ -43,9 +42,8 @@ const createStock = async (req, res) => {
 
    // We will handle the empty fields and throw a error
    let emptyFields = []
-   let wrongTicker = true
 
-   // If titles field is empty
+   // If ticker field is empty
    if(!ticker){
        emptyFields.push('ticker')
    }
@@ -58,11 +56,10 @@ const createStock = async (req, res) => {
    if(emptyFields.length > 0){
        return res.status(400).json({error: 'Please fill in all fields', emptyFields})
    }
-//    if(!cts.valid(ticker)){
-//        wrongTicker = true
-//        return res.status(400).json({error: 'Ticker does not exist', emptyFields})
-//    }
 
+   if(!cts.valid(ticker)) {
+    return res.status(400).json({error: 'Please enter a valid ticker'})
+}
    // Add stock to the database
    try {
         const user_id = req.user._id

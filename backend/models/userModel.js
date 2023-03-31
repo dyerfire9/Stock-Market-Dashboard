@@ -5,31 +5,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 // Define Schemas
-// Schema for Transactions
-const transactionsSchema = new Schema({
-    transaction_type: {
-      type: String, // BUY or SELL
-      required: true
-    },
-    symbol: {
-      type: String,
-      required: true
-    },
-    stock_price: { 
-        type: Number,
-        required: true
-    },
-    stock_quantity: {
-        type: Number,
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
-  }, {timestamps: true});
-  
-  // Schema for Owned Stocks
+
   const OwnedStockSchema = new Schema({
     ticker: {
       type: String,
@@ -43,7 +19,7 @@ const transactionsSchema = new Schema({
       type: Number,
       required: true
     }
-  });
+  }, {timestamps: true});
 
   // Schema for Users
   const userSchema = new Schema({
@@ -68,8 +44,8 @@ const transactionsSchema = new Schema({
         type: Number,
         default: 10000.00
     },
-    ownedStocks: [ OwnedStockSchema ],
-    transactionData: [transactionsSchema]
+    subbedStocks: [],
+    ownedStocks: [OwnedStockSchema]
   });
   
 // Static Signup Method
@@ -119,5 +95,16 @@ userSchema.statics.login = async function (email, password){
 }
 
 
+userSchema.statics.addFunds = async function (amount, email) {
+  const user = await this.findOne({email})
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  user.balance = parseInt(user.balance) + parseInt(amount)
+  await user.save()
+
+  return user
+}
 // Create model
 module.exports = mongoose.model('Users', userSchema)

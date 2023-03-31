@@ -17,8 +17,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "finnhub": "^1.2.16",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
+    "querystring-es3": "^0.2.1",
     "validator": "^13.9.0"
   }
 }

@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 // get controller functions 
-const {signupUser, loginUser, buyStock, sellStock, updateStock, balance} = require('../controllers/userController')
+const {signupUser, loginUser, balance} = require('../controllers/userController')
 // Get User Model
 const Users = require('../models/userModel')
 
@@ -12,14 +12,25 @@ router.post('/signup', signupUser)
 
 // login route
 router.post('/login', loginUser)
+
+//get all stocks
+router.get('/', getStocks)
+
+//get all subbed stocks stocks
+router.get('/subStocks', getSubStocks)
+
+// add sub stock route 
+router.post('/subStocks', addSubStock) 
+
+
 // buy stock route 
-router.post('/buyStock', buyStock)
+router.post('/', buyStock) 
 
 // sell stock route
-router.post('/sellStock', sellStock)
+router.post('/stock/:id', sellStock)
 
 // Update stock route
-router.post('/updateStock', updateStock)
+router.post('/stock/:id', updateStock)
 
 // add balance route 
 router.post('/balance', balance)
