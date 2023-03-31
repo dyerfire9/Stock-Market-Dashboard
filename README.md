@@ -10,7 +10,7 @@ Requirements
 
 1. Clone the Repo, then install dependencies
 2. npm install
-3. Create a .env file in the backend folder and add the following variables: 
+3. Open the .env file in the backend folder and add the following variables: 
     - PORT - The port that will host the server (ie: PORT=5000)
     - MONGO_URI - Mongo DB access URI
     - SECRET - JWT SECRET (random phrase)
