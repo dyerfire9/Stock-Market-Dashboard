@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 // get controller functions 
-const {signupUser, loginUser, balance} = require('../controllers/userController')
+const {signupUser, loginUser, getSubStocks, addSubStock, getStocks, buyStock, sellStock, updateStock, balance, subBalance} = require('../controllers/userController')
 // Get User Model
 const Users = require('../models/userModel')
 
@@ -34,6 +34,11 @@ router.post('/stock/:id', updateStock)
 
 // add balance route 
 router.post('/balance', balance)
+
+// add balance route 
+router.post('/subBalance', subBalance)
+
+
 
 
 module.exports = router

@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import { StocksContextProvider } from './context/StockContext'
 import { AuthContextProvider } from './context/AuthContext'
+import { UsersContextProvider } from './context/UsersContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
-    <StocksContextProvider>
-      <App />
-    </StocksContextProvider>
+    <UsersContextProvider>
+      <StocksContextProvider>
+        <App />
+      </StocksContextProvider>
+    </UsersContextProvider>
   </AuthContextProvider>
 );
 

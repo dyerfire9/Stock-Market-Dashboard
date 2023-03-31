@@ -6,7 +6,7 @@ let cts = require('check-ticker-symbol');
 
 const StockForm = () => {
     const {dispatch} = useStocksContext()
-    const {user} = useAuthContext()
+    const {user, dispatch: userDispatch} = useAuthContext()
 
     const [ticker, setTicker] = useState('')
     const [shares, setShares] = useState('')
@@ -23,8 +23,31 @@ const StockForm = () => {
             setError('You must be logged in')
             return
         }
-        // if(!cts.valid(ticker)){    
-        // }
+        const email = user.email
+        const amount = shares * cost
+        const response1 = await fetch('/api/user/subBalance', {
+            method: 'POST',
+            body: JSON.stringify({amount, email}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        const json1 = await response1.json()
+
+        if (!response1.ok) {
+            setError(json1.error)
+        }
+        // if response is good, we will reset all the states and set error state to null again
+        if (response1.ok){
+            console.log('User Before', user)
+            userDispatch({type: 'SET_BALANCE', payload: json1.balance})
+            console.log('User After', user)
+        }
+
+
+
+        
         const stock = {ticker, shares, cost}
 
         const response = await fetch('/api/stocks', {
@@ -55,7 +78,7 @@ const StockForm = () => {
     }
     
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="create1" onSubmit={handleSubmit}>
             <h3>Buy a Stock</h3>
             
             <label>Ticker (Symbol): </label>

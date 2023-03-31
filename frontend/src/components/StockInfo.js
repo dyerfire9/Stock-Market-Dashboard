@@ -36,25 +36,47 @@ const StockInfo = ({stock, tickerData}) => {
       }
 
     const {dispatch} = useStocksContext()
-    const {user} = useAuthContext()
+    const {user, dispatch: userDispatch} = useAuthContext()
 
-    async function handleClick() {
-        if (!user){
-            return
+async function handleClick() {
+    if (!user){
+        return
+    }
+    const email = user.email
+    const response1 = await fetch('/api/user/balance', {
+        method: 'POST',
+        body: JSON.stringify({amount: totalValue, email}),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
         }
-        const response = await fetch('/api/stocks/' + stock._id, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        const json = await response.json()
+    })
+    const json1 = await response1.json()
 
-        if (response.ok){
-            dispatch({type: 'SELL_STOCK', payload: json})
-        }
+    if (!response1.ok) {
+        console.log(json1.error)
     }
 
+    // if response is good, we will reset all the states and set error state to null again
+    if (response1.ok){
+        console.log('User Before', user)
+        userDispatch({type: 'SET_BALANCE', payload: json1.balance})
+        console.log('User After', user)
+
+    }
+
+    const response = await fetch('/api/stocks/' + stock._id, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
+    const json = await response.json()
+
+    if (response.ok){
+        dispatch({type: 'SELL_STOCK', payload: json})
+    }
+}
     return (  
         <div className="stock-info">
             <h4>{stock.ticker}</h4>
@@ -62,7 +84,7 @@ const StockInfo = ({stock, tickerData}) => {
             <p className="para"><strong>Buy Price $: </strong>{stock.cost}</p>
             <p className="para"><strong>Current (Daily) Price $: </strong>{price && roundTo(price, 2)}</p>
             <p className={`change ${((change) > 0) ? 'change-green' : 'change-red'}`}><strong>Change %: </strong>{roundTo(change, 2)}</p>
-            <p className="para"><strong>Total Value $:</strong> ${totalValue}</p>
+            <p className="para"><strong>Total Value $:</strong> ${roundTo(totalValue, 2)}</p>
             <p className="para">Bought {formatDistanceToNow(new Date(stock.createdAt), {addSuffix: true})}</p>
            <span onClick={handleClick}>Sell Stock</span>
         </div>

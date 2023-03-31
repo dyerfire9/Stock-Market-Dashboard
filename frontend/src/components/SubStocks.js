@@ -56,7 +56,7 @@ const SubStocks = ({subStock, tickerData}) => {
       }
 return(
     <div className="stock-info">
-    {/* {stockPic && <div className="sub-stock-title"><img src={`${stockPic}`} class="stock-icon"/><h4>{subStock.ticker} - {stockName}</h4></div>} */}
+    {stockPic && <div className="sub-stock-title"><img src={`${stockPic}`} class="stock-icon"/><h4>{subStock.ticker} - {stockName}</h4></div>}
     
     <p className="para"><strong>Current (Daily) Price $: </strong>{price && roundTo(price, 2)}</p>
     <span onClick={handleClick}>Delete</span>

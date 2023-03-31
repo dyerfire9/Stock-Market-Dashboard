@@ -31,10 +31,16 @@ header a {
   margin: 0 auto;
 }
 
+
 .stocks {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 40px;
+  display: grid; 
+  grid-template-columns: 2fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 40px; 
+  grid-template-areas: 
+    "stocks-components stocks-components create1"
+    "stocks-components stocks-components create1"
+    "stocks-components stocks-components create2"; 
 }
 .stock-info {
   background: #fff;
@@ -79,13 +85,12 @@ header a {
 
 /* Portfolio Container */
 .stocks-components{
-  width: 600px;
-  height: 400px;
+  grid-area: stocks-components;
+  height: 700px;
   padding: 10px;
   overflow: hidden;
   overflow-y: scroll;
 }
-
 .sub-stocks-components{
   width: 700px;
   height: 250px;
@@ -93,6 +98,13 @@ header a {
   overflow: hidden;
   overflow-y: scroll;
 }
+.create1{
+  grid-area: create1;
+}
+.create2{
+  grid-area: create2;
+}
+
 
 /*stock form */
 label, input {

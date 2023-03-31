@@ -14,12 +14,10 @@ const signupUser = async (req, res) => {
 
     try{
         const user = await User.signup(name, email, password)
-        const u_name = user.name
-        const u_balance = user.balance
         // Create a token
         const token = createToken(user._id)
 
-        res.status(200).json({u_name, u_balance, email, token})
+        res.status(200).json({user, email, token})
 
     }
     catch(error){
@@ -36,10 +34,8 @@ const loginUser = async (req, res) => {
 
         // Create a token
         const token = createToken(user._id)
-        const u_name = user.name
-        const u_balance = user.balance
 
-        res.status(200).json({u_name, u_balance, email, token})
+        res.status(200).json({user, email, token})
 
     }
     catch(error){
@@ -79,11 +75,31 @@ const updateStock = async (req, res) => {
 }
 // add balance route  
 const balance = async (req, res) => {
-    const {amount, email} = req.body
-    const user = await User.addFunds(amount, email)
-    res.json({msg: 'Updated Balance', email: user.email, balance: user.balance})
-  }
+    try{
+        const {amount, email} = req.body
+        const user = await User.addFunds(amount, email)
 
+
+        const balance = user.balance
+        res.status(200).json({balance})
+
+    }
+    catch(error){
+        res.status(400).json({error: error.message})
+    }
+  }
+  
+const subBalance = async (req, res) => {
+    try{ 
+    const {amount, email} = req.body
+    const user = await User.subFunds(amount, email)
+    const balance = user.balance
+    res.status(200).json({balance})
+    }
+    catch(error){
+        res.status(400).json({error: error.message})
+    }
+  }
 
 module.exports = {
     signupUser,
@@ -94,5 +110,6 @@ module.exports = {
     buyStock,
     sellStock,
     updateStock,
-    balance
+    balance,
+    subBalance
 }

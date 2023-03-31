@@ -5,49 +5,31 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 // Define Schemas
-
-  const OwnedStockSchema = new Schema({
-    ticker: {
-      type: String,
-      required: true
-    },
-    quantity: {
+// Schema for Users
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  balance: {
       type: Number,
-      required: true
-    },
-    cost: {
-      type: Number,
-      required: true
-    }
-  }, {timestamps: true});
+      default: 10000.00
+  }
+});
 
-  // Schema for Users
-  const userSchema = new Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    },
-    balance: {
-        type: Number,
-        default: 10000.00
-    },
-    subbedStocks: [],
-    ownedStocks: [OwnedStockSchema]
-  });
-  
 // Static Signup Method
 userSchema.statics.signup = async function (name, email, password){
 
@@ -106,5 +88,21 @@ userSchema.statics.addFunds = async function (amount, email) {
 
   return user
 }
+
+userSchema.statics.subFunds = async function (amount, email) {
+  const user = await this.findOne({email})
+  if (!user) {
+    throw new Error('User not found')
+  }
+  if ((parseInt(user.balance) - parseInt(amount)) < 0) {
+    throw new Error('Insuffient Funds')
+  }
+  
+  user.balance = parseInt(user.balance) - parseInt(amount)
+  await user.save()
+
+  return user
+}
+
 // Create model
 module.exports = mongoose.model('Users', userSchema)

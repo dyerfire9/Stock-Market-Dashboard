@@ -4,7 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 let cts = require('check-ticker-symbol');
 
 const FundsForm = () => {
-    const {user} = useAuthContext()
+    const {user, dispatch} = useAuthContext()
     let [amount, setAmount] = useState(1)
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
@@ -33,16 +33,18 @@ const FundsForm = () => {
         }
         // if response is good, we will reset all the states and set error state to null again
         if (response.ok){
-            console.log('Added Funds', json)
-            console.log(user)
+            console.log('User Before', user)
+            dispatch({type: 'SET_BALANCE', payload: json.balance})
+            console.log('User After', user)
+
         }
     }
     
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="create2" onSubmit={handleSubmit}>
             <h3>Add Funds</h3>
             
-            <label>Ticker Symbol ($): </label>
+            <label>Enter Amount ($): </label>
             <input 
                 type="number"
                 onChange={(e) => setAmount(e.target.value)}

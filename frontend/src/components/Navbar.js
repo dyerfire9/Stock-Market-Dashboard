@@ -5,36 +5,25 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export default function Navbar(){
     const { logout } = useLogout() 
     const { user } = useAuthContext()
-
+    const name = user && user.user ? user.user.name : '';
+    const balance = user && user.user ? user.user.balance : '';
     const handleClick = () => {
         logout()
     }
-    // const addFunds = async () => {
-    //     const amount = {value}
-
-    //     const response0 = await fetch('/api/user/balance', {
-    //         method: 'POST',
-    //         body: JSON.stringify(value, user.balance),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     })
-        
-    // }
+   
     return(
         <header>
             <div className="container">
                 <Link to="/">
                     <h1>Stocks Dashboard</h1>
                 </Link>
-                <Link to="/portfolio">
-                    <h2>Portfolio</h2>
+                <Link to="/subStocks">
+                    <h2>Daily Stocks</h2>
                 </Link>
                 <nav>
                     {user && (<div>
-                            <span>Hi, {user.u_name}</span>
-                            <span> | ${user.u_balance}</span>
+                            <span>Hi, {name}</span>
+                            <span> | ${balance}</span>
                             <button onClick={handleClick}>Logout</button>   
                         </div>
                     )}
