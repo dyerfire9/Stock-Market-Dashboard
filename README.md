@@ -13,7 +13,7 @@ Requirements
 3. Open the .env file in the backend folder and add the following variables: 
     - PORT - The port that will host the server (ie: PORT=5000)
     - MONGO_URI - Mongo DB access URI
-    - SECRET - JWT SECRET (random phrase)
+    - SECRET - JWT secret (random phrase)
 4. cd into the backend folder and start local host server by typing: npm run dev 
 5. open another terminal and cd into frontend server and start react app by typing: npm start
 6. Please wait a few seconds until server is up and running.
