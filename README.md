@@ -16,10 +16,10 @@ Requirements
     - SECRET - JWT SECRET (random phrase)
 4. cd into the backend folder and start local host server by typing: npm run dev 
 5. open another terminal and cd into frontend server and start react app by typing: npm start
-
+6. Please wait a few seconds until server is up and running.
 
 ## Note
-- I had used polygon.io API to get stock data and am limited to 5 requests/min. Too many requests will result in a error
+- I had used polygon.io API to get stock data and is limited to 5 requests/min. Too many requests will result in a error 429
 - Due to most API's requiring a monthly subscription in order to gain access to real time data, this app can only display daily stock data.
 - There are two pages to this app, Stocks Dashboard and Daily Stocks. Both are displayed on the navbar.
 
