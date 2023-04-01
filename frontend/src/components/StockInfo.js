@@ -12,7 +12,7 @@ const StockInfo = ({stock, tickerData}) => {
   
 
     useEffect(() => { 
-        tickerData.forEach((ticker)=> {
+       (tickerData && tickerData.forEach((ticker)=> {
             if(ticker.T === stock.ticker){
                 setData(ticker)
             }
@@ -20,7 +20,7 @@ const StockInfo = ({stock, tickerData}) => {
             setPrice(stockPrice)
             setChange((((stockPrice - stock.cost)) / stock.cost) * 100)
             setTotalValue((stock.shares * stockPrice))
-        })
+        }))
     }, [price, change, totalValue])
 
     // Function to round
