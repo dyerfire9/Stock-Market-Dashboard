@@ -11,11 +11,11 @@ const SubStocks = ({subStock, tickerData}) => {
 
     useEffect(() => {
         const getTickerPrice = () => {
-            tickerData.forEach((ticker)=> {
+            (tickerData && tickerData.forEach((ticker)=> {
                 if(ticker.T === subStock.ticker){
                     const stockPrice = ticker.vw
                     setPrice(stockPrice)
-            }})}
+            }}))}
 
         getTickerPrice()
       }, [symbol])
