@@ -19,7 +19,7 @@ Requirements
 6. Please wait a few seconds until server is up and running.
 
 ## Note
-- I had used polygon.io API to get stock data and is limited to 5 requests/min. Too many requests will result in data not displaying
+- I had used polygon.io API to get stock data and is limited to 5 requests/min. Too many requests will result in data not displaying for 1 min
 - Due to most API's requiring a monthly subscription in order to gain access to real time data, this app can only display daily stock data.
 - There are two pages to this app, Stocks Dashboard and Daily Stocks. Both are displayed on the navbar.
 
