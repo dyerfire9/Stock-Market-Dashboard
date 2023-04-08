@@ -1,7 +1,6 @@
 # Stock-Market-Dashboard 
 
-This is a Stock Market System App
-
+This is a Stock Market System App where one can buy, sell and track stocks from all most exchanges.
 
 ## How to Run
 Requirements
