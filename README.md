@@ -2,6 +2,13 @@
 
 This is a Stock Market System App where one can buy, sell and track stocks from all most exchanges.
 
+## Features
+- Register and login functionality to create a personalized account
+- Ability to purchase, track, and sell stocks directly from the app
+- Wallet feature allowing users to add funds and manage their account balance
+- Secure and encrypted data handling for maximum data privacy
+- Technologies: React, Express, MongoDB, Node.js
+
 ## How to Run
 Requirements
   - NodeJS
